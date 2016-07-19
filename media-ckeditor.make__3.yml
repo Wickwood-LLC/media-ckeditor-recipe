@@ -93,10 +93,10 @@ projects:
       - https://www.drupal.org/files/issues/incorrect_alter_hook_call-2566509-2.patch
 
   # The Media Ckeditor module.
-  media_ckeditor:
-    download:
-      type: git
-      branch: 7409f2c0923f7bd81e91303a9d6032505d89d1cf
+  media_ckeditor: "2.x-dev"
+    # download:
+    #   type: git
+    #   branch: 7409f2c0923f7bd81e91303a9d6032505d89d1cf
     patch:
 
       # Required patches (in my opinion...).
