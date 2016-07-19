@@ -132,10 +132,6 @@ projects:
       # @see https://www.drupal.org/node/2713757
       - https://www.drupal.org/files/issues/open_media_popup_on-2713757-2.patch
 
-      # This patch fully rendered file in WYSIWYG, including overridden fields
-      # @see https://www.drupal.org/node/2731335
-      - https://www.drupal.org/files/issues/fully_rendered_file_in-2731335-23.patch
-
       # Optional patches.
 
       # This patch adds an "Insert" button on Media fields that inserts the file
