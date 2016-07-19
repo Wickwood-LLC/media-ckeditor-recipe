@@ -88,6 +88,10 @@ projects:
       # @see https://www.drupal.org/node/2714581
       - https://www.drupal.org/files/issues/remove_references_to-2714581-FOR_USE_WITH_2308451.patch
 
+      # Adding patches that we include in our own version of Media module (see our wwm-drupal-7-site-starter.make file)
+      - https://www.drupal.org/files/issues/fix_file_usage_overcount_conflict_with_filefield_paths-2561803-2.patch
+      - https://www.drupal.org/files/issues/incorrect_alter_hook_call-2566509-2.patch
+
   # The Media Ckeditor module.
   media_ckeditor:
     download:
