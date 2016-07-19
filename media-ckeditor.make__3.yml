@@ -43,22 +43,26 @@ projects:
       # (Without the patch, all embeddings will adopt the same configuration.)
       # @see https://www.drupal.org/node/2308451
       - https://www.drupal.org/files/issues/only_one_view_mode-2308451-17.patch
+
       # This patch was needed to get alt and title to correctly be recognized
       # from the fields they are assigned to.
       # @see https://www.drupal.org/node/2416701
       - https://www.drupal.org/files/issues/wysiwyg_alt_and_title-2416701-30.patch
+
       # This patch improves support for more types of fields in the Media popup.
       # Without the patch, only single-value text fields are supported (as far
       # as I know) but with the patch, list fields, term reference fields,
       # entityreference fields, and multi-value fields work.
       # @see https://www.drupal.org/node/2062365
       - https://www.drupal.org/files/issues/term_reference_fields-2062365-13.patch
+
       # This patch encodes field data so that it is valid inside JSON, which is
       # necessary if you put a filtered text field on the file entity that is
       # "overridden in the WYSIWYG". Because these fields contain HTML, it
       # needs to be encoded before going into JSON, or the token will be invalid.
       # @see https://www.drupal.org/node/2497529
       - https://www.drupal.org/files/issues/media_module_token-2497529-3.patch
+
       # This patch has actually been committed, so I need to eventually remove
       # this and update the commit number above.
       # @see https://www.drupal.org/node/2545738
@@ -71,6 +75,7 @@ projects:
       # up with all of the view mode's classes. (because they accumulate).
       # @see https://www.drupal.org/node/2422153
       - https://www.drupal.org/files/issues/view_mode_classes-2422153-10.patch
+
       # This patch is needed if you want to use a custom field to control the
       # "link text" of embedded documents. Without the patch, a mysterious
       # link_text property gets added to the JSON which hijacks the outputted
@@ -96,21 +101,25 @@ projects:
       # using their "builder" thing. But we are trying to automate, so we are
       # downloading the plugins directly.
       - https://www.drupal.org/files/issues/media_plugin_is_not-2567275-2.patch
+
       # This patch is necessary if you are using the latest version of the
       # Ckeditor library. Without the patch, the Media widgets will cease being
       # widgets every time you toggle Source mode, and every time you edit the
       # entity.
       # @see https://www.drupal.org/node/2707177
       - https://www.drupal.org/files/issues/ckeditor_converting-2707177-2.patch
+
       # This patch makes the toolbar Media button work with the latest Ckeditor.
       # Without the patch, the toolbar button always tries to insert new Media.
       # With the patch, the toolbar button actually edits the selected Media.
       # @see https://www.drupal.org/node/2710841
       - https://www.drupal.org/files/issues/the_toolbar_button_does-2710841-8.patch
+
       # This patch is needed for field data to actually be remembered when the
       # popup is opened.
       # @see https://www.drupal.org/node/2455557
       - https://www.drupal.org/files/issues/2455557-4.patch
+
       # This opens the popup when the item is double-clicked in the WYSIWYG.
       # Not technically necessary, but it's something that users expect.
       # @see https://www.drupal.org/node/2713757
@@ -125,10 +134,12 @@ projects:
       # required though.
       # @see https://www.drupal.org/node/2451959
       - https://www.drupal.org/files/issues/media-insert_widget-2451959-14-FOR_USE_WITH_2710841-8.patch
+
       # This patch adds an entry to the Ckeditor right-click contextual menu.
       # Not at all required, but a usability feature.
       # @see https://www.drupal.org/node/2711129
       - https://www.drupal.org/files/issues/add_entry_in_ckeditor_s-2711129-2.patch
+      
       # This patch inserts the fully rendered file entities when editing in the
       # WYSIWYG, which gives editors a better idea of the actual thing they are
       # embedding. This is most needed when you have a lot of fields on the file
