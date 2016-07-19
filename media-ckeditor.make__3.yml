@@ -8,10 +8,13 @@
 #
 # 1. Enable the Media Ckeditor (media_ckeditor) module. It's dependencies will
 #    be enabled at the same time.
+
 # 2. At /admin/config/content/ckeditor/editg change the value for
 #    "Path to the CKEditor plugins directory" to: %l/ckeditor/plugins
+
 # 3. Configure a text format so that this checkbox is checked:
 #    - "Convert Media tags to markup"
+
 # 4. Configure the Ckeditor configuration for that text format so that these
 #    checkboxes are checked under the "Editor Appearance" section:
 #    - "Plugin for embedding files using Media CKEditor"
