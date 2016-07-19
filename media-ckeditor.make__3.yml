@@ -128,6 +128,10 @@ projects:
       # @see https://www.drupal.org/node/2713757
       - https://www.drupal.org/files/issues/open_media_popup_on-2713757-2.patch
 
+      # This patch fully rendered file in WYSIWYG, including overridden fields
+      # @see https://www.drupal.org/node/2731335
+      - https://www.drupal.org/files/issues/fully_rendered_file_in-2731335-23.patch
+
       # Optional patches.
 
       # This patch adds an "Insert" button on Media fields that inserts the file
@@ -142,7 +146,7 @@ projects:
       # Not at all required, but a usability feature.
       # @see https://www.drupal.org/node/2711129
       - https://www.drupal.org/files/issues/add_entry_in_ckeditor_s-2711129-2.patch
-      
+
       # This patch inserts the fully rendered file entities when editing in the
       # WYSIWYG, which gives editors a better idea of the actual thing they are
       # embedding. This is most needed when you have a lot of fields on the file
