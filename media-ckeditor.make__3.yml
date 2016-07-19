@@ -157,14 +157,14 @@ projects:
       - https://www.drupal.org/files/issues/fully_rendered_file_in-2731335-23.patch
 
   # Other required modules.
-  ckeditor: "1.17"
-  ctools: "1.9"
-  file_entity:
-    download:
-      type: git
-      branch: 	f74eb9a856c4443366e33278625028f084679e8a
-  token: "1.6"
-  views: "3.13"
+  # ckeditor: "1.17"
+  # ctools: "1.9"
+  # file_entity:
+  #   download:
+  #     type: git
+  #     branch: 	f74eb9a856c4443366e33278625028f084679e8a
+  # token: "1.6"
+  # views: "3.13"
 
 # The Ckeditor library and some plugins.
 libraries:
