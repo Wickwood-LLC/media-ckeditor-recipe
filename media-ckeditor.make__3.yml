@@ -1,0 +1,167 @@
+---
+# This is a recipe for Media, Ckeditor, and Media Ckeditor.
+# Download this recipe with this drush command:
+# drush make /path/to/this/file --no-core /path/to/destination/folder
+#
+# After downloading and moving files into place, here are the manual steps
+# needed to set everything up:
+#
+# 1. Enable the Media Ckeditor (media_ckeditor) module. It's dependencies will
+#    be enabled at the same time.
+# 2. At /admin/config/content/ckeditor/editg change the value for
+#    "Path to the CKEditor plugins directory" to: %l/ckeditor/plugins
+# 3. Configure a text format so that this checkbox is checked:
+#    - "Convert Media tags to markup"
+# 4. Configure the Ckeditor configuration for that text format so that these
+#    checkboxes are checked under the "Editor Appearance" section:
+#    - "Plugin for embedding files using Media CKEditor"
+#    - "Plugin file: lineutils"
+#    - "Plugin file: widget"
+
+api: 2
+core: "7.44"
+
+projects:
+
+  # Core.
+  drupal:
+    type: "core"
+    download:
+      branch: "7.44"
+
+  # The Media module.
+  media:
+    download:
+      type: git
+      branch: 89287f76df1ff24409b3ec474c59218929385733
+    patch:
+
+      # Required patches (in my option...).
+
+      # This patch allows the same file entity to be embedded multiple times in
+      # the same WYSIWYG and still be separately configurable in each instance.
+      # (Without the patch, all embeddings will adopt the same configuration.)
+      # @see https://www.drupal.org/node/2308451
+      - https://www.drupal.org/files/issues/only_one_view_mode-2308451-17.patch
+      # This patch was needed to get alt and title to correctly be recognized
+      # from the fields they are assigned to.
+      # @see https://www.drupal.org/node/2416701
+      - https://www.drupal.org/files/issues/wysiwyg_alt_and_title-2416701-30.patch
+      # This patch improves support for more types of fields in the Media popup.
+      # Without the patch, only single-value text fields are supported (as far
+      # as I know) but with the patch, list fields, term reference fields,
+      # entityreference fields, and multi-value fields work.
+      # @see https://www.drupal.org/node/2062365
+      - https://www.drupal.org/files/issues/term_reference_fields-2062365-13.patch
+      # This patch encodes field data so that it is valid inside JSON, which is
+      # necessary if you put a filtered text field on the file entity that is
+      # "overridden in the WYSIWYG". Because these fields contain HTML, it
+      # needs to be encoded before going into JSON, or the token will be invalid.
+      # @see https://www.drupal.org/node/2497529
+      - https://www.drupal.org/files/issues/media_module_token-2497529-3.patch
+      # This patch has actually been committed, so I need to eventually remove
+      # this and update the commit number above.
+      # @see https://www.drupal.org/node/2545738
+      - https://www.drupal.org/files/issues/incorrect-logic-display-value-2545738-1.patch
+
+      # Optional patches.
+
+      # This patch is necessary if you have CSS that triggers depending on the
+      # view mode of the file entity. Without the patch, file entities will end
+      # up with all of the view mode's classes. (because they accumulate).
+      # @see https://www.drupal.org/node/2422153
+      - https://www.drupal.org/files/issues/view_mode_classes-2422153-10.patch
+      # This patch is needed if you want to use a custom field to control the
+      # "link text" of embedded documents. Without the patch, a mysterious
+      # link_text property gets added to the JSON which hijacks the outputted
+      # link when the document is rendered. This patch is not recommended for
+      # legacy sites that may have content where users manually edited the
+      # "link_text" property directly in the JSON to control the link text.
+      # @see https://www.drupal.org/node/2714581
+      - https://www.drupal.org/files/issues/remove_references_to-2714581-FOR_USE_WITH_2308451.patch
+
+  # The Media Ckeditor module.
+  media_ckeditor:
+    download:
+      type: git
+      branch: 7409f2c0923f7bd81e91303a9d6032505d89d1cf
+    patch:
+
+      # Required patches (in my opinion...).
+
+      # This patch is necessary specifically for this recipe, because of the
+      # way that we are installing the Widget and Line Utilities CKeditor
+      # plugins. See below in the Libraries section. The normal way to install
+      # them is to "compile" Ckeditor by downloading it from the Ckeditor site
+      # using their "builder" thing. But we are trying to automate, so we are
+      # downloading the plugins directly.
+      - https://www.drupal.org/files/issues/media_plugin_is_not-2567275-2.patch
+      # This patch is necessary if you are using the latest version of the
+      # Ckeditor library. Without the patch, the Media widgets will cease being
+      # widgets every time you toggle Source mode, and every time you edit the
+      # entity.
+      # @see https://www.drupal.org/node/2707177
+      - https://www.drupal.org/files/issues/ckeditor_converting-2707177-2.patch
+      # This patch makes the toolbar Media button work with the latest Ckeditor.
+      # Without the patch, the toolbar button always tries to insert new Media.
+      # With the patch, the toolbar button actually edits the selected Media.
+      # @see https://www.drupal.org/node/2710841
+      - https://www.drupal.org/files/issues/the_toolbar_button_does-2710841-8.patch
+      # This patch is needed for field data to actually be remembered when the
+      # popup is opened.
+      # @see https://www.drupal.org/node/2455557
+      - https://www.drupal.org/files/issues/2455557-4.patch
+      # This opens the popup when the item is double-clicked in the WYSIWYG.
+      # Not technically necessary, but it's something that users expect.
+      # @see https://www.drupal.org/node/2713757
+      - https://www.drupal.org/files/issues/open_media_popup_on-2713757-2.patch
+
+      # Optional patches.
+
+      # This patch adds an "Insert" button on Media fields that inserts the file
+      # into an active WYSIWYG editor. This allows editors to first attach a
+      # file to an entity, and then from there, insert it into the Body. It
+      # helps editors keep track of the files that are embedded. Not at all
+      # required though.
+      # @see https://www.drupal.org/node/2451959
+      - https://www.drupal.org/files/issues/media-insert_widget-2451959-14-FOR_USE_WITH_2710841-8.patch
+      # This patch adds an entry to the Ckeditor right-click contextual menu.
+      # Not at all required, but a usability feature.
+      # @see https://www.drupal.org/node/2711129
+      - https://www.drupal.org/files/issues/add_entry_in_ckeditor_s-2711129-2.patch
+      # This patch inserts the fully rendered file entities when editing in the
+      # WYSIWYG, which gives editors a better idea of the actual thing they are
+      # embedding. This is most needed when you have a lot of fields on the file
+      # entities that can be overridden in the WYSIWYG and affect the display of
+      # the file, or if changing the view mode of a file has a significant affect
+      # on its display. If the above is not a requirement for you, I don't
+      # recommend using this patch.
+      - https://www.drupal.org/files/issues/fully_rendered_file_in-2731335-23.patch
+
+  # Other required modules.
+  ckeditor: "1.17"
+  ctools: "1.9"
+  file_entity:
+    download:
+      type: git
+      branch: 	f74eb9a856c4443366e33278625028f084679e8a
+  token: "1.6"
+  views: "3.13"
+
+# The Ckeditor library and some plugins.
+libraries:
+  ckeditor:
+    download:
+      type: "file"
+      url: "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.5.9/ckeditor_4.5.9_full.zip"
+  lineutils:
+    download:
+      type: "file"
+      url: "http://download.ckeditor.com/lineutils/releases/lineutils_4.5.9.zip"
+    destination: "libraries/ckeditor/plugins"
+  widget:
+    download:
+      type: "file"
+      url: "http://download.ckeditor.com/widget/releases/widget_4.5.9.zip"
+    destination: "libraries/ckeditor/plugins"
+
