@@ -155,6 +155,7 @@ projects:
       # the file, or if changing the view mode of a file has a significant affect
       # on its display. If the above is not a requirement for you, I don't
       # recommend using this patch.
+      # @see https://www.drupal.org/node/2731335
       - https://www.drupal.org/files/issues/fully_rendered_file_in-2731335-23.patch
 
   # Other required modules.
