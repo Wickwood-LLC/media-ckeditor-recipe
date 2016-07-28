@@ -107,6 +107,7 @@ projects:
       # them is to "compile" Ckeditor by downloading it from the Ckeditor site
       # using their "builder" thing. But we are trying to automate, so we are
       # downloading the plugins directly.
+      # @see https://www.drupal.org/node/2567275
       - https://www.drupal.org/files/issues/media_plugin_is_not-2567275-2.patch
 
       # This patch is necessary if you are using the latest version of the
